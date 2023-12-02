@@ -12,7 +12,7 @@ import java.io.File
  */
 
 fun main() {
-    val fileName = "input"
+    val fileName = "input_day1.txt"
     try {
         val sum1 = File(ClassLoader.getSystemResource(fileName).file).useLines { lines ->
             getCalibrationFromInputPart1(lines)
