@@ -1,7 +1,3 @@
-package day_one
-
-import java.io.File
-
 /**
  * Advent of Code: Day 1
  * https://adventofcode.com/2023/day/1
@@ -12,20 +8,15 @@ import java.io.File
  */
 
 fun main() {
-    val fileName = "input_day1.txt"
-    try {
-        val sum1 = File(ClassLoader.getSystemResource(fileName).file).useLines { lines ->
-            getCalibrationFromInputPart1(lines)
-        }
-        println("Total Sum - Part 1: $sum1")
+    val testInput = readLinesFromFile("test_day01_part1.txt")
+    check(getPart1Answer(testInput) == 142)
+    val testInput2 = readLinesFromFile("test_day01_part2.txt")
+    check(getPart2Answer(testInput2) == 281)
 
-        val sum2 = File(ClassLoader.getSystemResource(fileName).file).useLines { lines ->
-            getCalibrationFromInputPart2(lines)
-        }
-        println("Total Sum - Part 2: $sum2")
-    } catch (e: Exception) {
-        println("Error reading file: ${e.message}")
-    }
+    val fileName = "input_day01.txt"
+    val lines = readLinesFromFile(fileName)
+    println("Part 1: ${getPart1Answer(lines)}")
+    println("Part2: ${getPart2Answer(lines)}")
 }
 
 /**
@@ -33,7 +24,7 @@ fun main() {
  * Find the first digit and the last digit in each line, and concatenate them together to form a two-digit number.
  * Return the sum of all of these two-digit numbers.
  */
-fun getCalibrationFromInputPart1(lines: Sequence<String>): Int {
+private fun getPart1Answer(lines: Sequence<String>): Int {
     return lines.sumOf { line ->
         val digits = line.filter { it.isDigit() }
         val firstDigit = digits.firstOrNull() ?: "0"
@@ -48,7 +39,7 @@ fun getCalibrationFromInputPart1(lines: Sequence<String>): Int {
  * Find the first and last number in each line, either as a digit or its word equivalent, and concatenate them together
  * to form a two-digit number. Return the sum of all of these two-digit numbers.
  */
-fun getCalibrationFromInputPart2(lines: Sequence<String>): Int {
+private fun getPart2Answer(lines: Sequence<String>): Int {
     val numberDictionary: Map<String, Int> = mapOf(
         "one" to 1,
         "two" to 2,

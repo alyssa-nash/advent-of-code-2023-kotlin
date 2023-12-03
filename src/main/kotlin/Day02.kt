@@ -1,7 +1,3 @@
-package day_two
-
-import java.io.File
-
 /**
  * Advent of Code: Day 2
  * https://adventofcode.com/2023/day/2
@@ -11,24 +7,16 @@ import java.io.File
  * game result based on the criteria in each part.
  */
 
-fun main() {
-    val fileName = "input_day2.txt"
-    val sum = File(ClassLoader.getSystemResource(fileName).file).useLines { lines ->
-        getSumOfValidGames(lines)
-    }
-    println("Total Sum: $sum")
+private fun main() {
+    val testInput = readLinesFromFile("test_day02.txt")
+    check(getPart1Answer(testInput) == 8)
+    check(getPart2Answer(testInput) == 2286)
 
-    val sum2 = File(ClassLoader.getSystemResource(fileName).file).useLines { lines ->
-        getSumOfPowerOfGames(lines)
-    }
-    println("Total Sum: $sum2")
+    val fileName = "input_day02.txt"
+    val lines = readLinesFromFile(fileName)
+    println("Part 1: ${getPart1Answer(lines)}")
+    println("Part 2: ${getPart2Answer(lines)}")
 }
-
-/**
- * Part 1
- * Determine if a game is valid by comparing the number of each color in the game to the number of each color allowed.
- * Return the sum of the ids of all valid games.
- */
 
 val idPattern = Regex("Game (\\d+):")
 val pattern = Regex("\\d+ (blue|red|green)")
@@ -38,7 +26,12 @@ val colorCounts = mapOf(
     "blue" to 14
 )
 
-fun getSumOfValidGames(lines: Sequence<String>): Int {
+/**
+ * Part 1
+ * Determine if a game is valid by comparing the number of each color in the game to the number of each color allowed.
+ * Return the sum of the ids of all valid games.
+ */
+private fun getPart1Answer(lines: Sequence<String>): Int {
     return lines.sumOf { line ->
         val idMatch: MatchResult? = idPattern.find(line)
         val id = idMatch?.groupValues?.get(1)?.toInt() ?: 0
@@ -46,7 +39,7 @@ fun getSumOfValidGames(lines: Sequence<String>): Int {
     }
 }
 
-fun validateGame(line: String): Boolean {
+private fun validateGame(line: String): Boolean {
     return pattern.findAll(line).all { match ->
         val (number, color) = match.value.split(" ")
         number.toInt() <= colorCounts.getOrDefault(color, 0)
@@ -58,14 +51,13 @@ fun validateGame(line: String): Boolean {
  * Determine the power of a game by multiplying the largest number of each color in the game.
  * Return the sum of the power of all games.
  */
-
-fun getSumOfPowerOfGames(lines: Sequence<String>): Int {
+private fun getPart2Answer(lines: Sequence<String>): Int {
     return lines.sumOf { line ->
         getPowerOfGame(line)
     }
 }
 
-fun getPowerOfGame(line: String): Int {
+private fun getPowerOfGame(line: String): Int {
     val largestNumberPerColor = mutableMapOf(
         "red" to 0,
         "green" to 0,
