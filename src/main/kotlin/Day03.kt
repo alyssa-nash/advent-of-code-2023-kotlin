@@ -19,16 +19,16 @@ private fun main() {
 }
 
 private fun extractParts(lines: Sequence<String>): Map<Pair<Int, Int>, Int> =
-    lines.flatMapIndexed { y, line ->
+    lines.flatMapIndexed { lineNumber, line ->
         Regex("\\d+").findAll(line).map { match ->
-            Pair(match.range.first, y) to match.value.toInt()
+            Pair(match.range.first, lineNumber) to match.value.toInt()
         }
     }.toMap()
 
 private fun extractSymbols(lines: Sequence<String>, pattern: Regex): Sequence<Pair<Int, Int>> =
-    lines.flatMapIndexed { y, line ->
+    lines.flatMapIndexed { lineNumber, line ->
         pattern.findAll(line).map { match ->
-            Pair(match.range.first, y)
+            Pair(match.range.first, lineNumber)
         }
     }
 
