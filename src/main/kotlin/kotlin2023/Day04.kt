@@ -1,3 +1,6 @@
+package kotlin2023
+
+import readLinesFromFile
 import kotlin.math.pow
 
 /**
@@ -8,11 +11,11 @@ import kotlin.math.pow
  */
 
 private fun main() {
-    val testInput = readLinesFromFile("test_day04.txt")
+    val testInput = readLinesFromFile("2023/test_day04.txt")
     check(getPart1Answer(testInput) == 13)
     check(getPart2Answer(testInput) == 30)
 
-    val fileName = "input_day04.txt"
+    val fileName = "2023/input_day04.txt"
     val lines = readLinesFromFile(fileName)
     println("Part 1: ${getPart1Answer(lines)}")
     println("Part 2: ${getPart2Answer(lines)}")

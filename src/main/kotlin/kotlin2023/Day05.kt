@@ -1,3 +1,7 @@
+package kotlin2023
+
+import readLinesFromFile
+
 /**
  * Advent of Code: Day 5
  * https://adventofcode.com/2023/day/5
@@ -6,11 +10,11 @@
  */
 
 private fun main() {
-    val testInput = readLinesFromFile("test_day05.txt")
+    val testInput = readLinesFromFile("2023/test_day05.txt")
     check(getPart1Answer(testInput) == 35.toLong())
     check(getPart2Answer(testInput) == 46.toLong())
 
-    val fileName = "input_day05.txt"
+    val fileName = "2023/input_day05.txt"
     val lines = readLinesFromFile(fileName)
     println("Part 1: ${getPart1Answer(lines)}")
     println("Part 2: ${getPart2Answer(lines)}")
