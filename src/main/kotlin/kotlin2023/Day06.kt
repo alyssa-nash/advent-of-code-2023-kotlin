@@ -45,16 +45,16 @@ private fun getPart1Answer(lines: Sequence<String>): Int {
  * I'll admit, I walked through the formula rearrangements in Wolfram Alpha. I came up with the original formula and
  * asked for the formula for the bounds.
  *
- * buttonPressed * (raceLength - buttonPressed) = distanceTraveled >= distanceToBeat
+ * buttonPressed * (raceLength - buttonPressed) = distanceToBeat = distanceTraveled + 1
  * 0 >= buttonPressed^2 - buttonPressed * raceLength + distanceToBeat
  * bounds = (raceLength +- sqrt(raceLength^2 - 4 * distanceToBeat)) / 2
  * numberOfPossibleWins = floor(highRoot) - ceil(lowRoot) + 1
  */
 private fun getPossibleWins(race: Pair<Double, Double>) : Int {
     val raceLength = race.first
-    val timeToBeat = race.second + 1
-    val highBounds = (raceLength + sqrt((raceLength * raceLength) - (4 * timeToBeat))) / 2.0
-    val lowBounds = (raceLength - sqrt((raceLength * raceLength) - (4 * timeToBeat))) / 2.0
+    val distanceToBeat = race.second + 1
+    val highBounds = (raceLength + sqrt((raceLength * raceLength) - (4 * distanceToBeat))) / 2.0
+    val lowBounds = (raceLength - sqrt((raceLength * raceLength) - (4 * distanceToBeat))) / 2.0
     return (floor(highBounds) - ceil(lowBounds) + 1).toInt()
 }
 
