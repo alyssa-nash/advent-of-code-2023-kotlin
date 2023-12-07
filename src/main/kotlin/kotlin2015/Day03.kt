@@ -15,6 +15,7 @@ fun main() {
 }
 
 private fun getPart1Answer(lines: Sequence<String>): Int {
+
     return 0
 }
 
